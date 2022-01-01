@@ -16,8 +16,6 @@ export default function Dropdown() {
 		</option>
 	));
 
-	console.log(cityId);
-
 	return (
 		<select value={cityId} onChange={handleChange}>
 			<option value="">---Select City---</option>
