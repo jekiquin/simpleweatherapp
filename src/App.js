@@ -1,3 +1,4 @@
+import Dropdown from 'features/Dropdown/Dropdown';
 import MissingApi from 'components/MissingApi/MissingApi';
 import env from 'react-dotenv';
 
@@ -9,7 +10,7 @@ function App() {
 	}
 	return (
 		<div className="App">
-			<header className="App-header"></header>
+			<Dropdown />
 		</div>
 	);
 }
