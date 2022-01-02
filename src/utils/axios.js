@@ -40,6 +40,16 @@ class OpenWeatherMap extends Axios {
 			return { error };
 		}
 	}
+
+	async getForecastsByCityId(cityId) {
+		const endpoint = `/forecast?appid=${this.apiKey}&id=${cityId}`;
+		try {
+			const response = await this.instance.get(endpoint);
+			return response.data.list;
+		} catch (error) {
+			return { error };
+		}
+	}
 }
 
 export const weather = new OpenWeatherMap(BASEURL, APIKEY);

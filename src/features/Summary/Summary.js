@@ -35,7 +35,7 @@ export default function Summary() {
 			<div className="h-30 flex px-4 py-2">
 				<div className="w-full h-full">{displayDetails()}</div>
 				<button
-					className="h-fit w-56 p-2 self-end bg-gray-600 text-white rounded-sm"
+					className="h-fit w-56 p-2 self-end bg-gray-600 text-white rounded-sm disabled:text-slate-800"
 					disabled={disabled}>
 					5 Day Forecast
 				</button>
