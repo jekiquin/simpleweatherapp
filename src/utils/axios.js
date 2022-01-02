@@ -21,10 +21,25 @@ class Axios {
 		return this._apiKey;
 	}
 
-	async getData(urlParams) {
-		const response = await this._instance.get('urlParams');
-		return response.data;
+	get instance() {
+		return this._instance;
 	}
 }
 
-export const weather = new Axios(BASEURL);
+class OpenWeatherMap extends Axios {
+	constructor(baseUrl, apiKey = null) {
+		super(baseUrl, apiKey);
+	}
+
+	async getCurrentByCityId(cityId) {
+		const endpoint = `/weather?appid=${this.apiKey}&id=${cityId}`;
+		try {
+			const response = await this.instance.get(endpoint);
+			return response.data;
+		} catch (error) {
+			return { error };
+		}
+	}
+}
+
+export const weather = new OpenWeatherMap(BASEURL, APIKEY);

@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import cityIdReducer from 'features/Dropdown/dropdownSlice';
+import cityReducer from 'features/Dropdown/dropdownSlice';
+import summaryReducer from 'features/Summary/summarySlice';
 
 export const store = configureStore({
 	reducer: {
-		cityId: cityIdReducer
+		city: cityReducer,
+		summary: summaryReducer
 	}
 });
