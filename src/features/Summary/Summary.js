@@ -5,6 +5,7 @@ import {
 	selectSummaryError
 } from 'features/Summary/summarySlice';
 import { selectCity } from 'features/Dropdown/dropdownSlice';
+import DetailHeader from 'components/DetailHeader/DetailHeader';
 
 export default function Summary() {
 	const city = useSelector(selectCity);
@@ -33,9 +34,7 @@ export default function Summary() {
 
 	return (
 		<article className="w-96 my-4 border border-black rounded-xl overflow-hidden">
-			<div className="bg-gray-200 px-4 py-2">
-				<h2>City: {city}</h2>
-			</div>
+			<DetailHeader city={city} />
 			<div className="h-30 flex px-4 py-2">
 				<div className="w-full h-full">{displayDetails()}</div>
 				<button
