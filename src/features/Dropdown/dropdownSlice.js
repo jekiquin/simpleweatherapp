@@ -9,14 +9,14 @@ export const citySlice = createSlice({
 	reducers: {
 		setCity: (state, action) => {
 			const selectedCity = cities.find((city) => city.id.toString() === action.payload);
-			state.city = selectedCity ?? initialState;
+			state.city = selectedCity ?? initialState.city;
 		}
 	}
 });
 
 export const { setCity } = citySlice.actions;
 
-export const selectCityId = (state) => state.city.city.id;
+export const selectCityId = (state) => state.city.city.id.toString();
 export const selectCity = (state) =>
 	state.city.city.name && state.city.city.country
 		? `${state.city.city.name}, ${state.city.city.country}`

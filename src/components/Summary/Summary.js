@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import { useGetCurrentWeatherByCityIdQuery } from 'services/weatherApi';
-import { useCallback } from 'react';
-
-export default function Summary({ selectedCity }) {
-	const { cityId, city } = selectedCity;
+export default function Summary({ cityId }) {
 	const { data, error, isLoading } = useGetCurrentWeatherByCityIdQuery(cityId);
 
 	const displayDetails = useCallback(() => {
@@ -30,7 +28,7 @@ export default function Summary({ selectedCity }) {
 	const disabled = !cityId || error || isLoading;
 	return (
 		<article className="w-96 my-4 border border-black rounded-xl overflow-hidden">
-			<DetailHeader city={city} />
+			<DetailHeader />
 			<div className="h-30 flex px-4 py-2">
 				<div className="w-full h-full">{displayDetails()}</div>
 				<button
@@ -44,5 +42,5 @@ export default function Summary({ selectedCity }) {
 }
 
 Summary.propTypes = {
-	selectedCity: PropTypes.object.isRequired
+	cityId: PropTypes.string.isRequired
 };
