@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { setShowForecast } from './showForecastSlice';
 
@@ -19,3 +20,9 @@ export default function ShowForecastButton({ label, showForecast, disabled }) {
 		</button>
 	);
 }
+
+ShowForecastButton.propTypes = {
+	label: PropTypes.string.isRequired,
+	showForecast: PropTypes.bool.isRequired,
+	disabled: PropTypes.bool.isRequired
+};
