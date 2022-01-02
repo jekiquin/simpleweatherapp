@@ -1,17 +1,20 @@
-import { useSelector } from 'react-redux';
-import { selectCity } from 'features/Dropdown/dropdownSlice';
+import PropTypes from 'prop-types';
 import TableHeader from 'components/TableHeader/TableHeader';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import ForecastsDetails from 'components/ForecastsDetails/ForecastsDetails';
+import { useGetForecastsByCityIdQuery } from 'services/weatherApi';
 
-export default function Forecasts() {
-	const city = useSelector(selectCity);
-
+export default function Forecasts({ cityId }) {
+	const { data, error, isLoading } = useGetForecastsByCityIdQuery(cityId);
 	return (
 		<article className="w-full my-4">
 			<DetailHeader />
 			<TableHeader />
-			<ForecastsDetails />
+			{!error && !isLoading && <ForecastsDetails forecasts={data.list} />}
 		</article>
 	);
 }
+
+Forecasts.propTypes = {
+	cityId: PropTypes.string.isRequired
+};

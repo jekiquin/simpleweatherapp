@@ -9,7 +9,7 @@ export default function DetailsContainer() {
 		<section>
 			<Summary cityId={cityId} />
 			<hr />
-			<Forecasts />
+			<Forecasts cityId={cityId} />
 		</section>
 	);
 }
