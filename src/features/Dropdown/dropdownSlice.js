@@ -1,22 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import cities from 'data/cities.json';
 
+const initialState = { city: { id: '', name: '', country: '' } };
+
 export const citySlice = createSlice({
 	name: 'city',
-	initialState: { city: null },
+	initialState,
 	reducers: {
 		setCity: (state, action) => {
 			const selectedCity = cities.find((city) => city.id.toString() === action.payload);
-			state.city = selectedCity ?? null;
+			state.city = selectedCity ?? initialState;
 		}
 	}
 });
 
 export const { setCity } = citySlice.actions;
 
-export const selectCityId = (state) => state.city.city?.id;
+export const selectCityId = (state) => state.city.city.id;
 export const selectCity = (state) =>
-	state.city.city
+	state.city.city.name && state.city.city.country
 		? `${state.city.city.name}, ${state.city.city.country}`
 		: 'Please choose city from options';
 

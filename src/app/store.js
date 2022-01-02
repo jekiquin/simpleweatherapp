@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
 import { weatherApi } from 'services/weatherApi';
 import cityReducer from 'features/Dropdown/dropdownSlice';
 
@@ -9,3 +10,5 @@ export const store = configureStore({
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(weatherApi.middleware)
 });
+
+setupListeners(store.dispatch);

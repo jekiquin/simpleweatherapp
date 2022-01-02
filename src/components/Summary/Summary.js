@@ -1,33 +1,33 @@
-import { useSelector } from 'react-redux';
-import { selectSummary, selectSummaryLoading, selectSummaryError } from 'services/weatherApi';
-import { selectCity } from 'features/Dropdown/dropdownSlice';
+import PropTypes from 'prop-types';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
+import { useGetCurrentWeatherByCityIdQuery } from 'services/weatherApi';
+import { useCallback } from 'react';
 
-export default function Summary() {
-	const city = useSelector(selectCity);
-	// const summary = useSelector(selectSummary);
-	// const isLoading = useSelector(selectSummaryLoading);
-	// const isError = useSelector(selectSummaryError);
+export default function Summary({ selectedCity }) {
+	const { cityId, city } = selectedCity;
+	const { data, error, isLoading } = useGetCurrentWeatherByCityIdQuery(cityId);
 
-	// const displayDetails = () => {
-	// 	if (isLoading) {
-	// 		return <p>Loading Data.</p>;
-	// 	}
-	// 	if (isError) {
-	// 		return <p>Error while fetching data.</p>;
-	// 	}
-	// 	return (
-	// 		<>
-	// 			<p>Main: {summary?.weather[0].main}</p>
-	// 			<p>Description: {summary?.weather[0].description}</p>
-	// 			<p>Temp: {summary?.main.temp}</p>
-	// 			<p>Wind: {summary?.wind.speed}</p>
-	// 		</>
-	// 	);
-	// };
+	const displayDetails = useCallback(() => {
+		if (!cityId) {
+			return <></>;
+		}
+		if (isLoading) {
+			return <p>Fetching data</p>;
+		}
+		if (error) {
+			return <p>Error fetching data</p>;
+		}
+		return (
+			<>
+				<p>{data.weather[0].main}</p>
+				<p>{data.weather[0].description}</p>
+				<p>{data.main.temp}</p>
+				<p>{data.wind.speed}</p>
+			</>
+		);
+	}, [cityId, data, error, isLoading]);
 
-	// const disabled = !summary || isLoading || isError;
-
+	const disabled = !cityId || error || isLoading;
 	return (
 		<article className="w-96 my-4 border border-black rounded-xl overflow-hidden">
 			<DetailHeader city={city} />
@@ -42,3 +42,7 @@ export default function Summary() {
 		</article>
 	);
 }
+
+Summary.propTypes = {
+	selectedCity: PropTypes.object.isRequired
+};
