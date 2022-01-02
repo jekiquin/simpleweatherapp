@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import cities from 'data/cities.json';
-import { setCity, useCityId } from 'features/Dropdown/dropdownSlice';
+import { setCity, selectCityId } from 'features/Dropdown/dropdownSlice';
 
 export default function Dropdown() {
-	const cityId = useSelector(useCityId);
+	const cityId = useSelector(selectCityId);
 	const dispatch = useDispatch();
 
 	const handleChange = ({ target }) => {

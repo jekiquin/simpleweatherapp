@@ -14,8 +14,8 @@ export const citySlice = createSlice({
 
 export const { setCity } = citySlice.actions;
 
-export const useCityId = (state) => state.city.city?.id;
-export const useCity = (state) =>
+export const selectCityId = (state) => state.city.city?.id;
+export const selectCity = (state) =>
 	state.city.city
 		? `${state.city.city.name}, ${state.city.city.country}`
 		: 'Please choose city from options';

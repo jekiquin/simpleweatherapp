@@ -1,12 +1,16 @@
 import { useSelector } from 'react-redux';
-import { useSummary, useSummaryLoading, useSummaryError } from 'features/Summary/summarySlice';
-import { useCity } from 'features/Dropdown/dropdownSlice';
+import {
+	selectSummary,
+	selectSummaryLoading,
+	selectSummaryError
+} from 'features/Summary/summarySlice';
+import { selectCity } from 'features/Dropdown/dropdownSlice';
 
 export default function Summary() {
-	const city = useSelector(useCity);
-	const summary = useSelector(useSummary);
-	const isLoading = useSelector(useSummaryLoading);
-	const isError = useSelector(useSummaryError);
+	const city = useSelector(selectCity);
+	const summary = useSelector(selectSummary);
+	const isLoading = useSelector(selectSummaryLoading);
+	const isError = useSelector(selectSummaryError);
 
 	const displayDetails = () => {
 		if (isLoading) {

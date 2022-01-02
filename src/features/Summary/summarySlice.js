@@ -32,8 +32,8 @@ export const summarySlice = createSlice({
 	}
 });
 
-export const useSummary = (state) => state.summary.summary;
-export const useSummaryLoading = (state) => state.summary.isSummaryLoading;
-export const useSummaryError = (state) => state.summary.isSummaryError;
+export const selectSummary = (state) => state.summary.summary;
+export const selectSummaryLoading = (state) => state.summary.isSummaryLoading;
+export const selectSummaryError = (state) => state.summary.isSummaryError;
 
 export default summarySlice.reducer;

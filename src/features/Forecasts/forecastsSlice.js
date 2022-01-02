@@ -11,7 +11,7 @@ export const fetchForecastsByCityId = createAsyncThunk(
 const initialState = {
 	forecasts: null,
 	isForecastsLoading: false,
-	isSummaryError: false
+	isForecastsError: false
 };
 
 export const forecastsSlice = createSlice({
@@ -21,21 +21,23 @@ export const forecastsSlice = createSlice({
 	extraReducers: {
 		[fetchForecastsByCityId.pending]: (state) => {
 			state.isForecastsLoading = true;
-			state.isSummaryError = false;
+			state.isForecastsError = false;
 		},
 		[fetchForecastsByCityId.fulfilled]: (state, action) => {
 			state.forecasts = action.payload;
 			state.isForecastsLoading = false;
-			state.isSummaryError = false;
+			state.isForecastsError = false;
 		},
 		[fetchForecastsByCityId.rejected]: (state) => {
 			state.forecasts = null;
 			state.isForecastsLoading = false;
-			state.isSummaryError = true;
+			state.isForecastsError = true;
 		}
 	}
 });
 
 export const useForecasts = (state) => state.forecasts.forecasts;
+export const useForecastsLoading = (state) => state.forecasts.isForecastsLoading;
+export const useForecastsError = (state) => state.forecasts.isForecastsError;
 
 export default forecastsSlice.reducer;
