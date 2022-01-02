@@ -7,10 +7,12 @@ import { useGetForecastsByCityIdQuery } from 'services/weatherApi';
 export default function Forecasts({ cityId }) {
 	const { data, error, isLoading } = useGetForecastsByCityIdQuery(cityId);
 	return (
-		<article className="w-full my-4">
+		<article className="w-full detail-container">
 			<DetailHeader />
-			<TableHeader />
-			{!error && !isLoading && <ForecastsDetails forecasts={data.list} />}
+			<div className="m-4">
+				<TableHeader />
+				{!error && !isLoading && <ForecastsDetails forecasts={data.list} />}
+			</div>
 		</article>
 	);
 }

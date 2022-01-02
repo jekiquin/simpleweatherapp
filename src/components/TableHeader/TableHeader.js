@@ -6,7 +6,7 @@ export default function TableHeader() {
 	return (
 		<div className="grid grid-cols-custom">
 			{HEADERS.map((header) => (
-				<p className="text-center border" key={uuid()}>
+				<p className="text-center border bg-gray-400 text-white py-8" key={uuid()}>
 					{header}
 				</p>
 			))}

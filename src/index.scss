@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.detail-container {
+		@apply my-4 border border-black rounded-xl overflow-hidden;
+	}
+}
