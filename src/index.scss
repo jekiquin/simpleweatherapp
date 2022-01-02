@@ -6,4 +6,8 @@
 	.detail-container {
 		@apply my-4 border border-black rounded-xl overflow-hidden;
 	}
+
+	.table-data {
+		@apply text-center border border-black py-8;
+	}
 }
