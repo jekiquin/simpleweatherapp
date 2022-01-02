@@ -17,7 +17,7 @@ export default function Dropdown() {
 	));
 
 	return (
-		<select value={cityId} onChange={handleChange}>
+		<select className="bg-white border border-black" value={cityId} onChange={handleChange}>
 			<option value="">---Select City---</option>
 			{options}
 		</select>
