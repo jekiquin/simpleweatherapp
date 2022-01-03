@@ -2,7 +2,6 @@ import PageButton from 'components/PageButton/PageButton';
 import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentPage, selectTotalPages } from './paginationSlice';
-import { v4 as uuid } from 'uuid';
 
 const PAGESBUTTONS = 5;
 
@@ -12,11 +11,24 @@ export default function Pagination({ listLength }) {
 	const [startPage, setStartPage] = useState(1);
 
 	useEffect(() => {
-		if (totalPages - currentPage >= PAGESBUTTONS) {
-			setStartPage(currentPage);
+		if (!currentPage) return;
+		if (currentPage === 1) return setStartPage(1);
+		if (totalPages - currentPage + 1 <= 2) return;
+
+		if (currentPage - startPage > 2) {
+			setStartPage((prevPage) => prevPage + 1);
 		} else {
-			setStartPage(totalPages - PAGESBUTTONS + 1);
+			setStartPage((prevPage) => Math.max(1, prevPage - 1));
 		}
+		// if (totalPages - currentPage >= PAGESBUTTONS) {
+		// 	if (currentPage - startPage > 2) {
+		// 		setStartPage((prevPage) => prevPage + 1);
+		// 	} else if (currentPage - startPage < 2) {
+		// 		setStartPage((prevPage) => Math.max(prevPage - 1, 1));
+		// 	}
+		// } else {
+		// 	setStartPage(totalPages - PAGESBUTTONS + 1);
+		// }
 	}, [currentPage, totalPages]);
 
 	const buttonsToDisplay = useMemo(() => Math.min(totalPages, PAGESBUTTONS), [totalPages]);
