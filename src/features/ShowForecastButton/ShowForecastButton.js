@@ -13,7 +13,7 @@ export default function ShowForecastButton({ label, showForecast, disabled }) {
 		: 'border border-black px-4 py-1 bg-white text-black absolute top-2 right-2';
 	return (
 		<button
-			className={`h-fit  rounded-sm ${styleClass}`}
+			className={`h-fit rounded-sm ${styleClass}`}
 			disabled={disabled}
 			onClick={handleClick}>
 			{label}

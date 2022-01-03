@@ -4,7 +4,7 @@ import DetailHeader from 'components/DetailHeader/DetailHeader';
 import { useGetCurrentWeatherByCityIdQuery } from 'services/weatherApi';
 import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
 export default function Summary({ cityId }) {
-	const { data, error, isLoading } = useGetCurrentWeatherByCityIdQuery(cityId);
+	const { data, error, isFetching } = useGetCurrentWeatherByCityIdQuery(cityId);
 
 	const displayDetails = useCallback(() => {
 		if (!cityId) {
@@ -13,7 +13,7 @@ export default function Summary({ cityId }) {
 		if (error) {
 			return <p>Error fetching data</p>;
 		}
-		if (isLoading) {
+		if (isFetching) {
 			return <p>Fetching data</p>;
 		}
 		return (
@@ -24,9 +24,9 @@ export default function Summary({ cityId }) {
 				<p>{data.wind.speed}</p>
 			</>
 		);
-	}, [cityId, data, error, isLoading]);
+	}, [cityId, data, error, isFetching]);
 
-	const disabled = !cityId || error || isLoading;
+	const disabled = !cityId || error || isFetching;
 	return (
 		<article className="w-96 detail-container">
 			<DetailHeader />

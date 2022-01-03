@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import TableHeader from 'components/TableHeader/TableHeader';
@@ -7,12 +8,12 @@ import Pagination from 'features/Pagination/Pagination';
 import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
 import { useGetForecastsByCityIdQuery } from 'services/weatherApi';
 import { selectShowForecast } from 'features/ShowForecastButton/showForecastSlice';
-import { useEffect } from 'react';
+
 import { newPages } from 'features/Pagination/paginationSlice';
 export default function Forecasts({ cityId }) {
 	const showForecast = useSelector(selectShowForecast);
 	const dispatch = useDispatch();
-	const { data, error, isLoading } = useGetForecastsByCityIdQuery(cityId);
+	const { data, error, isFetching } = useGetForecastsByCityIdQuery(cityId);
 
 	useEffect(() => {
 		if (data) {
@@ -20,9 +21,9 @@ export default function Forecasts({ cityId }) {
 		}
 	}, [data, dispatch]);
 
-	const disabled = !cityId || error || isLoading;
+	const disabled = !cityId || error || isFetching;
 
-	const showDetails = !error && !isLoading;
+	const showDetails = !error && !isFetching;
 
 	return (
 		<article className="relative w-full detail-container" hidden={!showForecast}>
