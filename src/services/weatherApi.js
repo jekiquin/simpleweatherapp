@@ -9,10 +9,10 @@ export const weatherApi = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: BASEURL }),
 	endpoints: (builder) => ({
 		getCurrentWeatherByCityId: builder.query({
-			query: (cityId) => `weather?id=${cityId}&appid=${APIKEY}`
+			query: (cityId) => `weather?units=metric&id=${cityId}&appid=${APIKEY}`
 		}),
 		getForecastsByCityId: builder.query({
-			query: (cityId) => `forecast?id=${cityId}&appid=${APIKEY}`
+			query: (cityId) => `forecast?units=metric&id=${cityId}&appid=${APIKEY}`
 		})
 	})
 });

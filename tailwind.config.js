@@ -6,7 +6,10 @@ module.exports = {
 				30: '7.5rem'
 			},
 			gridTemplateColumns: {
-				custom: '2fr, repeat(4, 1fr), 3fr'
+				custom: '2fr, repeat(4, 1fr), 2fr'
+			},
+			minWidth: {
+				480: '480px'
 			}
 		}
 	},

@@ -32,7 +32,7 @@ export default function Pagination({ listLength }) {
 		});
 
 	return (
-		<div className="flex m-4 float-right border border-black rounded-lg overflow-hidden">
+		<div className="flex float-left justify-start m-4 border border-black rounded-lg overflow-hidden md:float-right">
 			<PageButton value="1" label="<<" />
 			{pagesButton}
 			<PageButton value={totalPages} label=">>" />

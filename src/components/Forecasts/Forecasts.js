@@ -26,7 +26,7 @@ export default function Forecasts({ cityId }) {
 	const showDetails = !error && !isFetching;
 
 	return (
-		<article className="relative w-full detail-container" hidden={!showForecast}>
+		<article className="relative w-full min-w-480 detail-container" hidden={!showForecast}>
 			<DetailHeader />
 			<ShowForecastButton label="Close" showForecast={false} disabled={disabled} />
 			<div className="m-4">
