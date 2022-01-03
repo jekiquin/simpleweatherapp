@@ -7,6 +7,10 @@
 		@apply my-4 border border-black rounded-xl overflow-hidden;
 	}
 
+	.table-container {
+		@apply grid grid-cols-custom-mobile md:grid-cols-custom;
+	}
+
 	.table-data {
 		@apply text-center border border-black py-8 px-1;
 	}
