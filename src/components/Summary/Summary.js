@@ -7,7 +7,7 @@ export default function Summary({ cityId }) {
 	const { data, error, isFetching } = useGetCurrentWeatherByCityIdQuery(cityId);
 
 	const getImageURL = useMemo(() => {
-		return cityId && data ? `http://openweathermap.org/img/w/${data.weather[0].icon}.png` : '';
+		return cityId && data ? `https://openweathermap.org/img/w/${data.weather[0].icon}.png` : '';
 	}, [data, cityId]);
 
 	const displayDetails = useCallback(() => {
