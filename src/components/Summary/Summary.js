@@ -3,7 +3,6 @@ import { useCallback } from 'react';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import { useGetCurrentWeatherByCityIdQuery } from 'services/weatherApi';
 import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
-import { kelvinToCelsiusFormatted } from 'utils/utils';
 export default function Summary({ cityId }) {
 	const { data, error, isFetching } = useGetCurrentWeatherByCityIdQuery(cityId);
 

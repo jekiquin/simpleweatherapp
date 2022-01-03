@@ -5,7 +5,7 @@ import { selectCurrentPage, selectTotalPages } from './paginationSlice';
 
 const PAGESBUTTONS = 5;
 
-export default function Pagination({ listLength }) {
+export default function Pagination() {
 	const currentPage = useSelector(selectCurrentPage);
 	const totalPages = useSelector(selectTotalPages);
 	const [startPage, setStartPage] = useState(1);
