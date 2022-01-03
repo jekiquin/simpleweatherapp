@@ -13,6 +13,7 @@ export default function Pagination({ listLength }) {
 	useEffect(() => {
 		if (!currentPage) return;
 		if (currentPage === 1) return setStartPage(1);
+		if (currentPage === totalPages) return setStartPage(totalPages - PAGESBUTTONS + 1);
 		if (totalPages - currentPage + 1 <= 2) return;
 
 		if (currentPage - startPage > 2) {
@@ -20,15 +21,6 @@ export default function Pagination({ listLength }) {
 		} else {
 			setStartPage((prevPage) => Math.max(1, prevPage - 1));
 		}
-		// if (totalPages - currentPage >= PAGESBUTTONS) {
-		// 	if (currentPage - startPage > 2) {
-		// 		setStartPage((prevPage) => prevPage + 1);
-		// 	} else if (currentPage - startPage < 2) {
-		// 		setStartPage((prevPage) => Math.max(prevPage - 1, 1));
-		// 	}
-		// } else {
-		// 	setStartPage(totalPages - PAGESBUTTONS + 1);
-		// }
 	}, [currentPage, totalPages]);
 
 	const buttonsToDisplay = useMemo(() => Math.min(totalPages, PAGESBUTTONS), [totalPages]);
