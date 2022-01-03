@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import { useGetCurrentWeatherByCityIdQuery } from 'services/weatherApi';
 import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
 export default function Summary({ cityId }) {
 	const { data, error, isFetching } = useGetCurrentWeatherByCityIdQuery(cityId);
+
+	const getImageURL = useMemo(() => {
+		return cityId && data ? `http://openweathermap.org/img/w/${data.weather[0].icon}.png` : '';
+	}, [data, cityId]);
 
 	const displayDetails = useCallback(() => {
 		if (!cityId) {
@@ -26,17 +30,22 @@ export default function Summary({ cityId }) {
 		);
 	}, [cityId, data, error, isFetching]);
 
+	console.log(getImageURL);
+
 	const disabled = !cityId || error || isFetching;
 	return (
 		<article className="w-72 detail-container md:w-96 ">
 			<DetailHeader />
 			<div className="h-30 flex px-4 py-2">
 				<div className="w-full h-full">{displayDetails()}</div>
-				<ShowForecastButton
-					label="5 Day Forecast"
-					showForecast={true}
-					disabled={disabled}
-				/>
+				<div className="h-full flex flex-col items-center justify-between">
+					<img src={getImageURL} alt="" aria-hidden={true} />
+					<ShowForecastButton
+						label="5 Day Forecast"
+						showForecast={true}
+						disabled={disabled}
+					/>
+				</div>
 			</div>
 		</article>
 	);
