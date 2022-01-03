@@ -13,11 +13,10 @@ export default function Pagination({ listLength }) {
 	useEffect(() => {
 		if (!currentPage) return;
 		if (currentPage === 1) return setStartPage(1);
-		if (currentPage === totalPages) return setStartPage(totalPages - PAGESBUTTONS + 1);
-		if (totalPages - currentPage + 1 <= 2) return;
+		if (totalPages - currentPage + 1 <= 2) return setStartPage(totalPages - PAGESBUTTONS + 1);
 
 		if (currentPage - startPage > 2) {
-			setStartPage((prevPage) => prevPage + 1);
+			setStartPage((prevPage) => Math.min(totalPages, prevPage + 1));
 		} else {
 			setStartPage((prevPage) => Math.max(1, prevPage - 1));
 		}
