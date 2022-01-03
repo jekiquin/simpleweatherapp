@@ -7,8 +7,10 @@ export default function Summary({ cityId }) {
 	const { data, error, isFetching } = useGetCurrentWeatherByCityIdQuery(cityId);
 
 	const getImageURL = useMemo(() => {
-		return cityId && data ? `https://openweathermap.org/img/w/${data.weather[0].icon}.png` : '';
-	}, [data, cityId]);
+		return !error && !isFetching
+			? `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
+			: '';
+	}, [error, isFetching]);
 
 	const displayDetails = useCallback(() => {
 		if (!cityId) {
@@ -29,8 +31,6 @@ export default function Summary({ cityId }) {
 			</>
 		);
 	}, [cityId, data, error, isFetching]);
-
-	console.log(getImageURL);
 
 	const disabled = !cityId || error || isFetching;
 	return (
