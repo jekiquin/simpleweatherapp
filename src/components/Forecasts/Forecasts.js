@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TableHeader from 'components/TableHeader/TableHeader';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import ForecastsDetails from 'components/ForecastsDetails/ForecastsDetails';
@@ -7,9 +7,18 @@ import Pagination from 'features/Pagination/Pagination';
 import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
 import { useGetForecastsByCityIdQuery } from 'services/weatherApi';
 import { selectShowForecast } from 'features/ShowForecastButton/showForecastSlice';
+import { useEffect } from 'react';
+import { newPages } from 'features/Pagination/paginationSlice';
 export default function Forecasts({ cityId }) {
 	const showForecast = useSelector(selectShowForecast);
+	const dispatch = useDispatch();
 	const { data, error, isLoading } = useGetForecastsByCityIdQuery(cityId);
+
+	useEffect(() => {
+		if (data) {
+			dispatch(newPages(data.list.length));
+		}
+	}, [data, dispatch]);
 
 	const disabled = !cityId || error || isLoading;
 
