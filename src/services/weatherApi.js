@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import env from 'react-dotenv';
 
 export const APIKEY = env.API_KEY;
-export const BASEURL = 'http://api.openweathermap.org/data/2.5';
+export const BASEURL = 'https://api.openweathermap.org/data/2.5';
 
 export const weatherApi = createApi({
 	reducerPath: 'weatherApi',
