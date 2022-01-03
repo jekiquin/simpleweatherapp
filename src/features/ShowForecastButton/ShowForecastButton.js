@@ -9,7 +9,7 @@ export default function ShowForecastButton({ label, showForecast, disabled }) {
 		dispatch(setShowForecast(showForecast));
 	};
 	const styleClass = showForecast
-		? 'justify-self-end w-56 bg-gray-600 text-white p-2'
+		? 'justify-self-end w-32 bg-gray-600 text-white p-2 md:w-56'
 		: 'border border-black px-4 py-1 bg-white text-black absolute top-2 right-2';
 	return (
 		<button

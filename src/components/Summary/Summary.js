@@ -36,7 +36,7 @@ export default function Summary({ cityId }) {
 	return (
 		<article className="w-72 detail-container md:w-96 ">
 			<DetailHeader />
-			<div className="h-30 flex px-4 py-2">
+			<div className="h-24 flex px-4 py-2 md:h-30">
 				<div className="w-full h-full">{displayDetails()}</div>
 				<div className="h-full flex flex-col items-center justify-between">
 					<img src={getImageURL} alt="" aria-hidden={true} />
