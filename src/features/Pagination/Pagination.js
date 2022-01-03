@@ -21,7 +21,7 @@ export default function Pagination({ listLength }) {
 		} else {
 			setStartPage((prevPage) => Math.max(1, prevPage - 1));
 		}
-	}, [currentPage, totalPages]);
+	}, [currentPage]);
 
 	const buttonsToDisplay = useMemo(() => Math.min(totalPages, PAGESBUTTONS), [totalPages]);
 

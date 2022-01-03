@@ -7,7 +7,6 @@ export default function PageButton({ value, label }) {
 	const dispatch = useDispatch();
 
 	const setPage = ({ target }) => {
-		console.log(target.value);
 		dispatch(gotoPage(Number(target.value)));
 	};
 
