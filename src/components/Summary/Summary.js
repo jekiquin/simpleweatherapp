@@ -10,7 +10,6 @@ export default function Summary({ cityId }) {
 
 	useEffect(() => {
 		if (cityId) {
-			console.log('unskipped');
 			setSkip(false);
 		}
 	}, [cityId]);
