@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import TableHeader from 'components/TableHeader/TableHeader';
@@ -8,17 +8,12 @@ import Pagination from 'features/Pagination/Pagination';
 import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
 import { useGetForecastsByCityIdQuery } from 'services/weatherApi';
 import { newPages } from 'features/Pagination/paginationSlice';
+import useSkip from 'hooks/skip-fetch';
 
 export default function Forecasts({ cityId }) {
-	const [skip, setSkip] = useState(true);
+	const skip = useSkip(cityId);
 	const dispatch = useDispatch();
 	const { data, error, isFetching } = useGetForecastsByCityIdQuery(cityId, { skip });
-
-	useEffect(() => {
-		if (cityId) {
-			setSkip(false);
-		}
-	}, [cityId]);
 
 	useEffect(() => {
 		if (data) {
