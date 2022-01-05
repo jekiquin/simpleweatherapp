@@ -9,7 +9,7 @@ function App() {
 		<MissingApi />;
 	}
 	return (
-		<div className="App container my-4 mx-auto text-xs md:text-base md:my-8">
+		<div className="App container px-4 my-4 mx-auto text-xs md:text-sm md:my-8 lg:text-base">
 			<Dropdown />
 			<DetailsContainer />
 		</div>

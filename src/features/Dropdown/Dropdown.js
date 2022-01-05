@@ -18,7 +18,9 @@ export default function Dropdown() {
 
 	return (
 		<select className="bg-white border border-black" value={cityId} onChange={handleChange}>
-			<option value="">---Select City---</option>
+			<option value="" hidden>
+				---Select City---
+			</option>
 			{options}
 		</select>
 	);

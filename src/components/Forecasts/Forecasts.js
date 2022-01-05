@@ -1,19 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import TableHeader from 'components/TableHeader/TableHeader';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import ForecastsDetails from 'components/ForecastsDetails/ForecastsDetails';
 import Pagination from 'features/Pagination/Pagination';
 import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
 import { useGetForecastsByCityIdQuery } from 'services/weatherApi';
-import { selectShowForecast } from 'features/ShowForecastButton/showForecastSlice';
-
 import { newPages } from 'features/Pagination/paginationSlice';
+
 export default function Forecasts({ cityId }) {
-	const showForecast = useSelector(selectShowForecast);
+	const [skip, setSkip] = useState(true);
 	const dispatch = useDispatch();
-	const { data, error, isFetching } = useGetForecastsByCityIdQuery(cityId);
+	const { data, error, isFetching } = useGetForecastsByCityIdQuery(cityId, { skip });
+
+	useEffect(() => {
+		if (cityId) {
+			setSkip(false);
+		}
+	}, [cityId]);
 
 	useEffect(() => {
 		if (data) {
@@ -23,15 +28,17 @@ export default function Forecasts({ cityId }) {
 
 	const disabled = !cityId || error || isFetching;
 
-	const showDetails = !error && !isFetching;
+	const showDetails = !error && !isFetching && data;
 
 	return (
-		<article className="relative w-full min-w-480 detail-container" hidden={!showForecast}>
+		<article className="relative w-full detail-container h-119 md:h-129" hidden={skip}>
 			<DetailHeader />
 			<ShowForecastButton label="Close" showForecast={false} disabled={disabled} />
-			<div className="m-4">
-				<TableHeader />
-				{showDetails && <ForecastsDetails forecasts={data.list} />}
+			<div className="px-4">
+				<div className="py-4 overflow-x-auto">
+					<TableHeader />
+					{showDetails && <ForecastsDetails forecasts={data.list} />}
+				</div>
 			</div>
 			{showDetails && <Pagination listLength={data.list.length} />}
 		</article>

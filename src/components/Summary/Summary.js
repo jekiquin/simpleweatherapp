@@ -1,13 +1,22 @@
 import PropTypes from 'prop-types';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import { useGetCurrentWeatherByCityIdQuery } from 'services/weatherApi';
 import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
+
 export default function Summary({ cityId }) {
-	const { data, error, isFetching } = useGetCurrentWeatherByCityIdQuery(cityId);
+	const [skip, setSkip] = useState(true);
+	const { data, error, isFetching } = useGetCurrentWeatherByCityIdQuery(cityId, { skip });
+
+	useEffect(() => {
+		if (cityId) {
+			console.log('unskipped');
+			setSkip(false);
+		}
+	}, [cityId]);
 
 	const getImageURL = useMemo(() => {
-		return !error && !isFetching
+		return !error && !isFetching && data
 			? `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
 			: '';
 	}, [error, isFetching]);
@@ -24,10 +33,10 @@ export default function Summary({ cityId }) {
 		}
 		return (
 			<>
-				<p>{data.weather[0].main}</p>
-				<p>{data.weather[0].description}</p>
-				<p>{data.main.temp} C</p>
-				<p>{data.wind.speed} m/s</p>
+				<p>{data?.weather[0].main}</p>
+				<p>{data?.weather[0].description}</p>
+				<p>{data?.main.temp} C</p>
+				<p>{data?.wind.speed} m/s</p>
 			</>
 		);
 	}, [cityId, data, error, isFetching]);

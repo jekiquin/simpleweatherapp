@@ -8,7 +8,7 @@
 	}
 
 	.table-container {
-		@apply grid grid-cols-custom-mobile md:grid-cols-custom;
+		@apply grid grid-cols-custom-mobile min-w-480 md:grid-cols-custom;
 	}
 
 	.table-data {
