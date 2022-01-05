@@ -1,19 +1,13 @@
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import { useGetCurrentWeatherByCityIdQuery } from 'services/weatherApi';
 import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
+import useSkip from 'hooks/skip-fetch';
 
 export default function Summary({ cityId }) {
-	const [skip, setSkip] = useState(true);
+	const skip = useSkip(cityId);
 	const { data, error, isFetching } = useGetCurrentWeatherByCityIdQuery(cityId, { skip });
-
-	useEffect(() => {
-		if (cityId) {
-			console.log('unskipped');
-			setSkip(false);
-		}
-	}, [cityId]);
 
 	const getImageURL = useMemo(() => {
 		return !error && !isFetching && data
