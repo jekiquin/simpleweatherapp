@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TableHeader from 'components/TableHeader/TableHeader';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import ForecastsDetails from 'components/ForecastsDetails/ForecastsDetails';
@@ -9,8 +9,10 @@ import ShowForecastButton from 'features/ShowForecastButton/ShowForecastButton';
 import { useGetForecastsByCityIdQuery } from 'services/weatherApi';
 import { newPages } from 'features/Pagination/paginationSlice';
 import useSkip from 'hooks/skip-fetch';
+import { selectShowForecast } from 'features/ShowForecastButton/showForecastSlice';
 
 export default function Forecasts({ cityId }) {
+	const showForecast = useSelector(selectShowForecast);
 	const skip = useSkip(cityId);
 	const dispatch = useDispatch();
 	const { data, error, isFetching } = useGetForecastsByCityIdQuery(cityId, { skip });
@@ -26,7 +28,9 @@ export default function Forecasts({ cityId }) {
 	const showDetails = !error && !isFetching && data;
 
 	return (
-		<article className="relative w-full detail-container h-119 md:h-129" hidden={skip}>
+		<article
+			className="relative w-full detail-container h-119 md:h-129"
+			hidden={skip || !showForecast}>
 			<DetailHeader />
 			<ShowForecastButton label="Close" showForecast={false} disabled={disabled} />
 			<div className="px-4">
